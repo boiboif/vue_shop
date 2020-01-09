@@ -6,6 +6,8 @@ import './plugins/element.js'
 import './assets/css/global.css'
 // 导入字体图标
 import './assets/css/fonts/iconfont.css'
+// 导入第三方表格
+import treeTable from 'vue-table-with-tree-grid'
 
 // 导入axios
 import axios from 'axios'
@@ -20,6 +22,8 @@ axios.interceptors.request.use(config => {
   // 最后要return出config请求对象
   return config
 })
+
+Vue.component('tree-table', treeTable)
 
 Vue.config.productionTip = false
 
