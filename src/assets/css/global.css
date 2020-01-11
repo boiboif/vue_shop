@@ -27,3 +27,15 @@ body,
 .el-cascader-menu__wrap {
   height: 204px!important;
 }
+
+/* 步骤条样式 */
+.el-steps {
+  margin: 15px 0;
+}
+.el-step__title {
+  font-size: 13px;
+}
+/* 富文本编辑器最小高度 */
+.ql-editor {
+  min-height: 400px;
+}

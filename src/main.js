@@ -8,6 +8,12 @@ import './assets/css/global.css'
 import './assets/css/fonts/iconfont.css'
 // 导入第三方表格
 import treeTable from 'vue-table-with-tree-grid'
+// 导入富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+// require styles 导入富文本编辑器的样式
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 
 // 导入axios
 import axios from 'axios'
@@ -23,7 +29,23 @@ axios.interceptors.request.use(config => {
   return config
 })
 
+// 定义一个全局过滤器，用来处理时间格式
+Vue.filter('dateFormat', function (originVal) {
+  const date = new Date(originVal)
+  const y = date.getFullYear()
+  // padStart方法，如果字符串长度不满足第一个参数，就在字符串前面补第二个参数的值
+  const m = (date.getMonth() + 1 + '').padStart(2, '0')
+  const d = (date.getDate() + '').padStart(2, '0')
+  const hh = (date.getHours() + '').padStart(2, '0')
+  const mm = (date.getMinutes() + '').padStart(2, '0')
+  const ss = (date.getSeconds() + '').padStart(2, '0')
+
+  return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+})
+
 Vue.component('tree-table', treeTable)
+// 注册富文本编辑器
+Vue.use(VueQuillEditor)
 
 Vue.config.productionTip = false
 
