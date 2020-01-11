@@ -14,6 +14,9 @@ import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+// 导入nprogress 和 对应的样式表
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 // 导入axios
 import axios from 'axios'
@@ -24,8 +27,17 @@ Vue.prototype.$http = axios
 
 // 请求拦截
 axios.interceptors.request.use(config => {
+  // 请求发送时，显示进度条
+  nprogress.start()
   config.headers.Authorization = window.sessionStorage.getItem('token')
   // 最后要return出config请求对象
+  return config
+})
+
+// 响应拦截
+axios.interceptors.response.use(config => {
+  // 请求结束时， 隐藏进度条
+  nprogress.done()
   return config
 })
 
